@@ -1,12 +1,12 @@
-package com.ian.submission2.model;
+package com.ian.submission2.viewmodel;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ian.submission2.data.Token;
-import com.ian.submission2.data.User;
+import com.ian.submission2.BuildConfig;
+import com.ian.submission2.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MainModel extends ViewModel {
+public class MainViewModel extends ViewModel {
     private MutableLiveData<ArrayList<User>> listUser = new MutableLiveData<>();
 
 
@@ -29,10 +29,10 @@ public class MainModel extends ViewModel {
     public void setListUser(final String username) {
         final ArrayList<User> listItem = new ArrayList<>();
 
-        final String url = "https://api.github.com/search/users?q="+username;
+        final String url = "https://api.github.com/search/users?q=" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", Token.TOKEN);
+        client.addHeader("Authorization", BuildConfig.TOKEN);
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -43,7 +43,7 @@ public class MainModel extends ViewModel {
                     if (responseObject.getInt("total_count") != 0) {
                         JSONArray list = responseObject.getJSONArray("items");
 
-                        for (int i = 0;i < list.length();i++) {
+                        for (int i = 0; i < list.length(); i++) {
                             JSONObject user = list.getJSONObject(i);
                             User userItems = new User();
                             userItems.setUsername(user.getString("login"));
@@ -61,7 +61,7 @@ public class MainModel extends ViewModel {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.e("Submission 2", "onFailure: "+error.getMessage() );
+                Log.e("Submission 2", "onFailure: " + error.getMessage());
             }
         });
     }

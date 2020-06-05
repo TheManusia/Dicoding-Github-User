@@ -1,20 +1,19 @@
-package com.ian.submission2.model;
+package com.ian.submission2.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ian.submission2.data.Token;
-import com.ian.submission2.data.User;
+import com.ian.submission2.BuildConfig;
+import com.ian.submission2.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import cz.msebera.android.httpclient.Header;
 
-public class DetailModel extends ViewModel {
+public class DetailViewModel extends ViewModel {
     private MutableLiveData<User> listUser = new MutableLiveData<>();
 
     public MutableLiveData<User> getListUser() {
@@ -22,10 +21,10 @@ public class DetailModel extends ViewModel {
     }
 
     public void setListUser(String username) {
-        String url = "https://api.github.com/users/" +username;
+        String url = "https://api.github.com/users/" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", Token.TOKEN);
+        client.addHeader("Authorization", BuildConfig.TOKEN);
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

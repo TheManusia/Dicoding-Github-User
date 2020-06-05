@@ -1,4 +1,4 @@
-package com.ian.submission2.data;
+package com.ian.submission2.model;
 
 public class User {
     private String username;

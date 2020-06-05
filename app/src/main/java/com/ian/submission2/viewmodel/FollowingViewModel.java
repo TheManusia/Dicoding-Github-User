@@ -1,10 +1,10 @@
-package com.ian.submission2.model;
+package com.ian.submission2.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ian.submission2.data.Token;
-import com.ian.submission2.data.User;
+import com.ian.submission2.BuildConfig;
+import com.ian.submission2.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class FollowerModel extends ViewModel {
+public class FollowingViewModel extends ViewModel {
     private MutableLiveData<ArrayList<User>> listUser = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<User>> getListUser() {
@@ -26,10 +26,10 @@ public class FollowerModel extends ViewModel {
     public void setListUser(String username) {
         final ArrayList<User> listItem = new ArrayList<>();
 
-        String url = "https://api.github.com/users/"+username+"/followers";
+        String url = "https://api.github.com/users/" + username + "/following";
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", Token.TOKEN);
+        client.addHeader("Authorization", BuildConfig.TOKEN);
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

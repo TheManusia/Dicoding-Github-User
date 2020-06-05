@@ -1,4 +1,4 @@
- package com.ian.submission2.adapter;
+package com.ian.submission2.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.ian.submission2.R;
-import com.ian.submission2.data.User;
+import com.ian.submission2.model.User;
 
 import java.util.ArrayList;
 

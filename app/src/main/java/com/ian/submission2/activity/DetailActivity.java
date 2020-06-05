@@ -1,25 +1,25 @@
 package com.ian.submission2.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.ian.submission2.R;
 import com.ian.submission2.adapter.SectionsPagerAdapter;
-import com.ian.submission2.data.User;
-import com.ian.submission2.model.DetailModel;
-import com.ian.submission2.model.FollowerModel;
-import com.ian.submission2.model.FollowingModel;
+import com.ian.submission2.model.User;
+import com.ian.submission2.viewmodel.DetailViewModel;
+import com.ian.submission2.viewmodel.FollowerViewModel;
+import com.ian.submission2.viewmodel.FollowingViewModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -28,7 +28,7 @@ import static com.ian.submission2.MainActivity.EXTRA_USERNAME;
 public class DetailActivity extends AppCompatActivity {
     private TextView tvUsername, tvName, tvLocation, tvRepository, tvCompany;
     private CircleImageView civAvatar;
-    private DetailModel model;
+    private DetailViewModel model;
     private ProgressBar progressBar;
     private TabLayout tabs;
 
@@ -52,15 +52,17 @@ public class DetailActivity extends AppCompatActivity {
         tvCompany = findViewById(R.id.tvCompany);
         civAvatar = findViewById(R.id.civAvatar);
 
-        getSupportActionBar().setElevation(0);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        model = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailModel.class);
+        model = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(DetailViewModel.class);
 
         String username = getIntent().getStringExtra(EXTRA_USERNAME);
         model.setListUser(username);
 
-        Log.d("Submission 2", "onCreate: "+username);
+        Log.d("Submission 2", "onCreate: " + username);
 
         setData();
     }
@@ -88,15 +90,15 @@ public class DetailActivity extends AppCompatActivity {
                 tvCompany.setText(company);
                 Glide.with(DetailActivity.this)
                         .load(user.getAvatar())
-                        .apply(new RequestOptions().override(150,150))
+                        .apply(new RequestOptions().override(150, 150))
                         .into(civAvatar);
-                FollowerModel followerModel = new ViewModelProvider(DetailActivity.this, new ViewModelProvider.NewInstanceFactory()).get(FollowerModel.class);
-                followerModel.setListUser(user.getUsername());
+                FollowerViewModel followerViewModel = new ViewModelProvider(DetailActivity.this, new ViewModelProvider.NewInstanceFactory()).get(FollowerViewModel.class);
+                followerViewModel.setListUser(user.getUsername());
 
-                FollowingModel followingModel = new ViewModelProvider(DetailActivity.this, new ViewModelProvider.NewInstanceFactory()).get(FollowingModel.class);
-                followingModel.setListUser(user.getUsername());
+                FollowingViewModel followingViewModel = new ViewModelProvider(DetailActivity.this, new ViewModelProvider.NewInstanceFactory()).get(FollowingViewModel.class);
+                followingViewModel.setListUser(user.getUsername());
 
-                Log.d("Submission 2", "showSelectedUser: "+EXTRA_USERNAME+"/"+user.getUsername());
+                Log.d("Submission 2", "showSelectedUser: " + EXTRA_USERNAME + "/" + user.getUsername());
             }
         });
     }

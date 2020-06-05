@@ -1,11 +1,5 @@
 package com.ian.submission2;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -18,15 +12,21 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ian.submission2.activity.DetailActivity;
 import com.ian.submission2.adapter.UserAdapter;
-import com.ian.submission2.data.User;
-import com.ian.submission2.model.MainModel;
+import com.ian.submission2.model.User;
+import com.ian.submission2.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private MainModel mainModel;
+    private MainViewModel mainViewModel;
     private ProgressBar progressBar;
     private UserAdapter adapter;
     private TextView tvSearch;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        mainModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MainModel.class);
+        mainViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MainViewModel.class);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    mainModel.setListUser(query);
+                    mainViewModel.setListUser(query);
                     progressBar.setVisibility(View.VISIBLE);
                     return true;
                 }
@@ -81,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onQueryTextChange(String newText) {
                     if (!(newText.equals(""))) {
                         tvSearch.setVisibility(View.INVISIBLE);
-                        mainModel.setListUser(newText);
+                        mainViewModel.setListUser(newText);
                         progressBar.setVisibility(View.VISIBLE);
                     }
                     return true;
                 }
             });
 
-            mainModel.getListUser().observe(this, new Observer<ArrayList<User>>() {
+            mainViewModel.getListUser().observe(this, new Observer<ArrayList<User>>() {
                 @Override
                 public void onChanged(ArrayList<User> users) {
                     if (users != null) {

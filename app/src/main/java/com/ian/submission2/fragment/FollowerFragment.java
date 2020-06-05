@@ -2,6 +2,11 @@ package com.ian.submission2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,28 +16,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
 import com.ian.submission2.MainActivity;
 import com.ian.submission2.R;
 import com.ian.submission2.activity.DetailActivity;
 import com.ian.submission2.adapter.UserAdapter;
-import com.ian.submission2.data.User;
-import com.ian.submission2.model.FollowerModel;
+import com.ian.submission2.model.User;
+import com.ian.submission2.viewmodel.FollowerViewModel;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class FollowerFragment extends Fragment {
     private RecyclerView rvFollower;
-    private FollowerModel followerModel;
+    private FollowerViewModel followerViewModel;
     private UserAdapter adapter;
     private ProgressBar progressBar;
 
@@ -64,7 +62,7 @@ public class FollowerFragment extends Fragment {
             }
         });
 
-        followerModel = new ViewModelProvider(requireActivity(), new ViewModelProvider.NewInstanceFactory()).get(FollowerModel.class);
+        followerViewModel = new ViewModelProvider(requireActivity(), new ViewModelProvider.NewInstanceFactory()).get(FollowerViewModel.class);
 
         getDataUser();
     }
@@ -81,14 +79,14 @@ public class FollowerFragment extends Fragment {
     }
 
     private void getDataUser() {
-        followerModel.getListUser().observe(this, new Observer<ArrayList<User>>() {
+        followerViewModel.getListUser().observe(this, new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
                 progressBar.setVisibility(View.GONE);
-                Log.d("Submission 2", "onChanged: "+users);
+                Log.d("Submission 2", "onChanged: " + users);
                 if (users != null) {
                     adapter.setData(users);
-                    Log.d("Submission 2", "onChanged: "+users);
+                    Log.d("Submission 2", "onChanged: " + users);
                 }
             }
         });

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.ian.submission2"
@@ -18,6 +18,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String" , "TOKEN", '\"7f209d6310f054f2f4ff502d22065254b8491388\"')
+        }
+        debug {
+            buildConfigField("String" , "TOKEN", '\"7f209d6310f054f2f4ff502d22065254b8491388\"')
         }
     }
 
