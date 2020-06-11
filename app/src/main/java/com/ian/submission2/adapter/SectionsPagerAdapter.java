@@ -30,7 +30,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = null;
+        Fragment fragment;
         if (position == 0) {
             fragment = new FollowerFragment();
         } else {

@@ -9,6 +9,14 @@ public class User {
     private int following;
     private int repository;
 
+    public User() {
+    }
+
+    public User(String username, String avatar) {
+        this.username = username;
+        this.avatar = avatar;
+    }
+
     public String getCompany() {
         return company;
     }

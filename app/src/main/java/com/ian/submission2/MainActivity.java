@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ian.submission2.activity.DetailActivity;
+import com.ian.submission2.activity.FavoriteActivity;
 import com.ian.submission2.adapter.UserAdapter;
 import com.ian.submission2.model.User;
 import com.ian.submission2.viewmodel.MainViewModel;
@@ -93,16 +96,24 @@ public class MainActivity extends AppCompatActivity {
                 public void onChanged(ArrayList<User> users) {
                     if (users != null) {
                         adapter.setData(users);
-                        progressBar.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.notfound), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuFavorite) {
+            startActivity(new Intent(this, FavoriteActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void showSelectedUser(User user) {
