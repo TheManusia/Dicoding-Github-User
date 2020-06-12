@@ -57,7 +57,7 @@ public class FavoriteActivity extends AppCompatActivity implements LoadUserCallb
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Favorite");
+            getSupportActionBar().setTitle(getResources().getString(R.string.favorite));
         }
     }
 

@@ -3,6 +3,7 @@
     package="com.ian.submission2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.SettingActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <receiver
+            android:name=".reminder.ReminderReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
             android:name=".activity.FavoriteActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activity.DetailActivity"
             android:parentActivityName=".MainActivity" />

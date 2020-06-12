@@ -15,4 +15,6 @@
     <string name="repo">Repository: %d</string>
     <string name="favorite">Favorite</string>
     <string name="reminder">Reminder</string>
+    <string name="reminderContent">Let\'s find user popular user on Github!</string>
+    <string name="setting">Setting</string>
 </resources>

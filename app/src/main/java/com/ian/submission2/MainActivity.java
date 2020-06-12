@@ -1,9 +1,13 @@
 package com.ian.submission2;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,11 +26,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ian.submission2.activity.DetailActivity;
 import com.ian.submission2.activity.FavoriteActivity;
+import com.ian.submission2.activity.SettingActivity;
 import com.ian.submission2.adapter.UserAdapter;
 import com.ian.submission2.model.User;
+import com.ian.submission2.reminder.ReminderReceiver;
 import com.ian.submission2.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private MainViewModel mainViewModel;
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvSearch = findViewById(R.id.tvSearch);
+
         RecyclerView rvList = findViewById(R.id.rvMain);
         rvList.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
@@ -111,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menuFavorite) {
             startActivity(new Intent(this, FavoriteActivity.class));
+            return true;
+        } else if (item.getItemId() == R.id.menuSetting) {
+            startActivity(new Intent(this, SettingActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
