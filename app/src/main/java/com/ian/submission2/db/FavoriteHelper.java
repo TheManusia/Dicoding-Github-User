@@ -74,10 +74,7 @@ public class FavoriteHelper {
         );
     }
 
-    public long insert(User user) {
-        ContentValues value = new ContentValues();
-        value.put(USERNAME, user.getUsername());
-        value.put(AVATAR, user.getAvatar());
+    public long insert(ContentValues value) {
         return database.insert(DATABASE_TABLE, null, value);
     }
 

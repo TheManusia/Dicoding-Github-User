@@ -1,6 +1,8 @@
 package com.ian.submission2.activity;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,9 @@ import com.ian.submission2.viewmodel.FollowingViewModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.ian.submission2.MainActivity.EXTRA_USERNAME;
+import static com.ian.submission2.db.DatabaseContract.NoteColumns.AVATAR;
+import static com.ian.submission2.db.DatabaseContract.NoteColumns.CONTENT_URI;
+import static com.ian.submission2.db.DatabaseContract.NoteColumns.USERNAME;
 
 public class DetailActivity extends AppCompatActivity {
     private TextView tvUsername, tvName, tvLocation, tvRepository, tvCompany;
@@ -37,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     private TabLayout tabs;
     private FloatingActionButton btnFav;
     private FavoriteHelper favoriteHelper;
+    private Uri uriWithId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,17 +122,22 @@ public class DetailActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (isFavorite(user.getUsername())) {
-                            int result = favoriteHelper.deleteByUsername(user.getUsername());
-                            if (result > 0) {
-                                Toast.makeText(DetailActivity.this, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
-                                btnFav.setImageResource(R.drawable.ic_baseline_favorite_border_48);
-                            }
+//                            int result = favoriteHelper.deleteByUsername(user.getUsername());
+//                            if (result > 0) {
+//                            }
+                            uriWithId = Uri.parse(CONTENT_URI + "/" + user.getUsername());
+                            getContentResolver().delete(uriWithId, null, null);
+                            Toast.makeText(DetailActivity.this, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                            btnFav.setImageResource(R.drawable.ic_baseline_favorite_border_48);
                         } else {
-                            long result = favoriteHelper.insert(user);
-                            if (result > 0) {
-                                Toast.makeText(DetailActivity.this, "Berhasil ditambahkan", Toast.LENGTH_SHORT).show();
-                                btnFav.setImageResource(R.drawable.ic_baseline_favorite_black_48);
-                            }
+                            ContentValues value = new ContentValues();
+                            value.put(USERNAME, user.getUsername());
+                            value.put(AVATAR, user.getAvatar());
+                            getContentResolver().insert(CONTENT_URI, value);
+                            Toast.makeText(DetailActivity.this, "Berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                            btnFav.setImageResource(R.drawable.ic_baseline_favorite_black_48);
+//                            long result = favoriteHelper.insert(value);
+//                            if (result > 0) {}
                         }
                     }
                 });

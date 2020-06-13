@@ -1,4 +1,4 @@
-package com.ian.submission2.activity;
+package com.ian.favoriteuser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,29 +17,22 @@ import android.widget.ProgressBar;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.ian.submission2.R;
-import com.ian.submission2.adapter.UserAdapter;
-import com.ian.submission2.db.FavoriteHelper;
-import com.ian.submission2.helper.MappingHelper;
-import com.ian.submission2.model.User;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.ian.submission2.MainActivity.EXTRA_USERNAME;
-import static com.ian.submission2.db.DatabaseContract.NoteColumns.CONTENT_URI;
+import static com.ian.favoriteuser.DatabaseContract.NoteColumns.CONTENT_URI;
 
-public class FavoriteActivity extends AppCompatActivity implements LoadUserCallback {
+public class MainActivity extends AppCompatActivity implements LoadUserCallback {
     private RecyclerView rvFavorite;
     private UserAdapter adapter;
-    private FavoriteHelper favoriteHelper;
     private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
+        setContentView(R.layout.activity_main);
 
         progressBar = findViewById(R.id.progressBar2);
         rvFavorite = findViewById(R.id.rvFavorite);
@@ -47,15 +40,6 @@ public class FavoriteActivity extends AppCompatActivity implements LoadUserCallb
         rvFavorite.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
         rvFavorite.setAdapter(adapter);
-        adapter.setOnItemClickCallBack(new UserAdapter.OnItemClickCallBack() {
-            @Override
-            public void onItemClicked(User user) {
-                showSelectedUser(user);
-            }
-        });
-
-        favoriteHelper = FavoriteHelper.getInstance(getApplicationContext());
-        favoriteHelper.open();
 
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
@@ -69,15 +53,8 @@ public class FavoriteActivity extends AppCompatActivity implements LoadUserCallb
         }
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(getResources().getString(R.string.favorite));
         }
-    }
-
-    private void showSelectedUser(User user) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(EXTRA_USERNAME, user.getUsername());
-        startActivity(intent);
     }
 
     @Override

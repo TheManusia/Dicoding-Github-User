@@ -1,4 +1,4 @@
-package com.ian.submission2.db;
+package com.ian.favoriteuser;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
