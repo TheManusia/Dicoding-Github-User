@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Submission 2</string>
+	<string name="search">Search</string>
+	<string name="username">Username</string>
+	<string name="notfound">Data Not Found</string>
+	<string name="follower">Followers (%d)</string>
+	<string name="following">Following (%d)</string>
+	<string name="name">Name</string>
+	<string name="search_user">Search User</string>
+	<string name="location">Location</string>
+	<string name="company">Company</string>
+	<string name="repo">Repository: %d</string>
+	<string name="favorite">Favorite</string>
+	<string name="reminder">Reminder</string>
+	<string name="reminderContent">Let\'s find user popular user on Github!</string>
+	<string name="setting">Setting</string>
+</resources>

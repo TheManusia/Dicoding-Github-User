@@ -1,13 +1,9 @@
 package com.ian.submission2;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,11 +25,9 @@ import com.ian.submission2.activity.FavoriteActivity;
 import com.ian.submission2.activity.SettingActivity;
 import com.ian.submission2.adapter.UserAdapter;
 import com.ian.submission2.model.User;
-import com.ian.submission2.reminder.ReminderReceiver;
 import com.ian.submission2.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private MainViewModel mainViewModel;

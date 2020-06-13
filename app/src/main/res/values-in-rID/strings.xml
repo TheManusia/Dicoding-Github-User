@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Submission 2</string>
+	<string name="search">Cari</string>
+	<string name="username">Nama pengguna</string>
+	<string name="notfound">Data Tidak Ditemukan</string>
+	<string name="follower">Pengikut (%d)</string>
+	<string name="following">Mengikuti (%d)</string>
+	<string name="name">Nama</string>
+	<string name="search_user">Cari Pengguna</string>
+	<string name="location">Tempat</string>
+	<string name="company">Perusahaan</string>
+	<string name="repo">Repository: %d</string>
+	<string name="favorite">Favorit</string>
+	<string name="reminder">Peringatan</string>
+	<string name="reminderContent">Mari temukan pengguna pengguna populer di Github!</string>
+	<string name="setting">Pengaturan</string>
+</resources>

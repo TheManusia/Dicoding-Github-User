@@ -27,6 +27,8 @@ import com.ian.submission2.viewmodel.DetailViewModel;
 import com.ian.submission2.viewmodel.FollowerViewModel;
 import com.ian.submission2.viewmodel.FollowingViewModel;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.ian.submission2.MainActivity.EXTRA_USERNAME;
@@ -100,8 +102,8 @@ public class DetailActivity extends AppCompatActivity {
                 String repository = String.format(getResources().getString(R.string.repo), user.getRepository());
                 String company = !user.getCompany().equals("null") ? user.getCompany() : "";
 
-                tabs.getTabAt(0).setText(follower);
-                tabs.getTabAt(1).setText(following);
+                Objects.requireNonNull(tabs.getTabAt(0)).setText(follower);
+                Objects.requireNonNull(tabs.getTabAt(1)).setText(following);
 
                 tvName.setText(name);
                 tvUsername.setText(user.getUsername());

@@ -8,13 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.ian.submission2.MainActivity;
 import com.ian.submission2.R;
 import com.ian.submission2.reminder.ReminderReceiver;
 

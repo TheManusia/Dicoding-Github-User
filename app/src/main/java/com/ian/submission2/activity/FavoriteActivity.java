@@ -33,7 +33,6 @@ import static com.ian.submission2.db.DatabaseContract.NoteColumns.CONTENT_URI;
 public class FavoriteActivity extends AppCompatActivity implements LoadUserCallback {
     private RecyclerView rvFavorite;
     private UserAdapter adapter;
-    private FavoriteHelper favoriteHelper;
     private ProgressBar progressBar;
 
     @Override
@@ -54,7 +53,7 @@ public class FavoriteActivity extends AppCompatActivity implements LoadUserCallb
             }
         });
 
-        favoriteHelper = FavoriteHelper.getInstance(getApplicationContext());
+        FavoriteHelper favoriteHelper = FavoriteHelper.getInstance(getApplicationContext());
         favoriteHelper.open();
 
         HandlerThread handlerThread = new HandlerThread("DataObserver");

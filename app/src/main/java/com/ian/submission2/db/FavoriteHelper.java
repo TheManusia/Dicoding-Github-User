@@ -8,10 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.ian.submission2.model.User;
-
 import static android.provider.BaseColumns._ID;
-import static com.ian.submission2.db.DatabaseContract.NoteColumns.AVATAR;
 import static com.ian.submission2.db.DatabaseContract.NoteColumns.USERNAME;
 import static com.ian.submission2.db.DatabaseContract.TABLE_NAME;
 
